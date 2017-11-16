@@ -7,6 +7,7 @@ This list includes sources from:
 - https://gist.github.com/randomecho/5020859
 - Some have been manually checked on http://auspost.com.au/postcode
 
+Example format for CSV
 ```
 Postcode, Suburb, State, Lat, Lon,
 '200', 'Australian National University', 'ACT', -35.280, 149.120,
