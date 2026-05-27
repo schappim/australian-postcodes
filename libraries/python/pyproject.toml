@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "australian-postcodes"
+version = "2026.5.27"
+description = "Australian postcode + suburb lookup, with bundled data"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "schappim" }]
+keywords = ["australia", "postcode", "postcodes", "suburb", "zipcode"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Database",
+]
+
+[project.urls]
+Homepage = "https://github.com/schappim/australian-postcodes"
+
+[project.scripts]
+australian-postcodes = "australian_postcodes.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["australian_postcodes*"]
+
+[tool.setuptools.package-data]
+australian_postcodes = ["data/australian-postcodes.csv"]
