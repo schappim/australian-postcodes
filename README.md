@@ -122,12 +122,13 @@ Drop-in libraries for the four most common stacks, each with the dataset
 bundled (no network calls, no external dependencies). All live under
 [`libraries/`](libraries/) and share the same API surface.
 
-| Stack       | Path                                              | Install                                                                                                  |
-|-------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| Ruby (gem)  | [`libraries/ruby`](libraries/ruby)                | `gem install australian_postcodes`                                                                       |
-| Node (npm)  | [`libraries/javascript`](libraries/javascript)    | `npm install australian-postcodes`                                                                       |
-| Python (pip)| [`libraries/python`](libraries/python)            | `pip install australian-postcodes`                                                                       |
-| Go (CLI+pkg)| [`libraries/go`](libraries/go)                    | `go install github.com/schappim/australian-postcodes/libraries/go@latest`                                |
+| Stack         | Path                                              | Install                                                                                                  |
+|---------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Ruby (gem)    | [`libraries/ruby`](libraries/ruby)                | `gem install australian_postcodes`                                                                       |
+| Node (npm)    | [`libraries/javascript`](libraries/javascript)    | `npm install australian-postcodes`                                                                       |
+| Python (pip)  | [`libraries/python`](libraries/python)            | `pip install australian-postcodes`                                                                       |
+| Go (CLI+pkg)  | [`libraries/go`](libraries/go)                    | `go install github.com/schappim/australian-postcodes/libraries/go@latest`                                |
+| Homebrew CLI  | [tap](https://github.com/schappim/homebrew-auspostcodes) | `brew install schappim/auspostcodes/australian-postcodes`                                                |
 
 Every library exposes the same four operations:
 
@@ -208,6 +209,28 @@ postcodes.FindBySuburb("Springfield", "QLD")
 The Go package compiles the dataset into a single `postcodes.go` source file
 (no `go:embed`, no separate `.csv`) — the resulting binary is ~3.8 MB and
 needs nothing else at runtime.
+
+### Homebrew (prebuilt CLI)
+
+For macOS or Linux, the Go CLI is published as a Homebrew bottle via the
+[schappim/auspostcodes](https://github.com/schappim/homebrew-auspostcodes) tap.
+No Go toolchain required.
+
+```sh
+brew tap schappim/auspostcodes
+brew install australian-postcodes
+
+# or, one-shot
+brew install schappim/auspostcodes/australian-postcodes
+```
+
+```sh
+australian-postcodes postcode-for Melbourne VIC      # -> 3000
+australian-postcodes by-suburb --state NSW Sydney
+```
+
+Supported architectures: macOS arm64 / amd64, Linux arm64 / amd64.
+Prebuilt tarballs are attached to each [release](https://github.com/schappim/australian-postcodes/releases).
 
 ## Contributions
 
