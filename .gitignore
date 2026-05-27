@@ -12,6 +12,6 @@ dist/
 # Node
 node_modules/
 
-# Go binaries (built artifacts; source is committed)
+# Go build artefacts (compiled binaries only — package source is committed)
 /libraries/go/postcodes-cli
-/libraries/go/postcodes
+/libraries/go/australian-postcodes
