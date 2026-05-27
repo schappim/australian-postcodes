@@ -1,3 +1,17 @@
 helpers
 .DS_Store
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+# Node
+node_modules/
+
+# Go binaries (built artifacts; source is committed)
+/libraries/go/postcodes-cli
+/libraries/go/postcodes
