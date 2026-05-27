@@ -1,0 +1,28 @@
+{
+  "name": "australian-postcodes",
+  "version": "2026.5.27",
+  "description": "Australian postcode + suburb lookup, with bundled data. No network calls.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "data/australian-postcodes.csv",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "keywords": [
+    "australia",
+    "postcode",
+    "postcodes",
+    "suburb",
+    "zipcode"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schappim/australian-postcodes.git"
+  }
+}
