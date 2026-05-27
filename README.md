@@ -116,6 +116,99 @@ covers your query — every byte you avoid is tokens you avoid:
 
 ACT alone is ~150 rows and 2 KB — vastly cheaper to load than the full 16k-row file.
 
+## Libraries
+
+Drop-in libraries for the four most common stacks, each with the dataset
+bundled (no network calls, no external dependencies). All live under
+[`libraries/`](libraries/) and share the same API surface.
+
+| Stack       | Path                                              | Install                                                                                                  |
+|-------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Ruby (gem)  | [`libraries/ruby`](libraries/ruby)                | `gem install australian_postcodes`                                                                       |
+| Node (npm)  | [`libraries/javascript`](libraries/javascript)    | `npm install australian-postcodes`                                                                       |
+| Python (pip)| [`libraries/python`](libraries/python)            | `pip install australian-postcodes`                                                                       |
+| Go (CLI+pkg)| [`libraries/go`](libraries/go)                    | `go install github.com/schappim/australian-postcodes/libraries/go@latest`                                |
+
+Every library exposes the same four operations:
+
+- `find_by_postcode(postcode)` — every record matching a postcode
+- `find_by_suburb(suburb, state=...)` — every record matching a suburb (case-insensitive), optionally narrowed by state
+- `postcode_for(suburb, state)` — the postcode for a (suburb, state) pair, or null/nil/""/None
+- `all_in_state(state)` — every record in a state
+
+### Ruby
+
+Gemfile:
+
+```ruby
+# Published gem
+gem "australian_postcodes"
+
+# Or straight from this repo (pin a tag/branch/commit)
+gem "australian_postcodes",
+    git: "https://github.com/schappim/australian-postcodes.git",
+    glob: "libraries/ruby/*.gemspec"
+
+# Or a local checkout
+gem "australian_postcodes", path: "../australian-postcodes/libraries/ruby"
+```
+
+```ruby
+require "australian_postcodes"
+AustralianPostcodes.postcode_for("Sydney", "NSW")  # => "2000"
+AustralianPostcodes.find_by_suburb("Springfield", state: "QLD")
+```
+
+### JavaScript / TypeScript
+
+```sh
+npm install australian-postcodes
+```
+
+```js
+const ap = require("australian-postcodes");
+ap.postcodeFor("Sydney", "NSW");        // "2000"
+ap.findBySuburb("Springfield", { state: "QLD" });
+```
+
+TypeScript types are bundled.
+
+### Python
+
+```sh
+pip install australian-postcodes
+```
+
+```python
+import australian_postcodes as ap
+ap.postcode_for("Sydney", "NSW")        # '2000'
+ap.find_by_suburb("Springfield", state="QLD")
+```
+
+A CLI is also installed:
+
+```sh
+australian-postcodes postcode-for Melbourne VIC      # -> 3000
+australian-postcodes by-suburb Sydney --state NSW
+```
+
+### Go
+
+```sh
+go install github.com/schappim/australian-postcodes/libraries/go@latest
+```
+
+```go
+import "github.com/schappim/australian-postcodes/libraries/go/postcodes"
+
+postcodes.PostcodeFor("Sydney", "NSW")  // "2000"
+postcodes.FindBySuburb("Springfield", "QLD")
+```
+
+The Go package compiles the dataset into a single `postcodes.go` source file
+(no `go:embed`, no separate `.csv`) — the resulting binary is ~3.8 MB and
+needs nothing else at runtime.
+
 ## Contributions
 
 Pull requests welcome — particularly for:
